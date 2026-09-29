@@ -1,0 +1,24 @@
+{
+    "name": "考研知识点收录助手",
+    "short_name": "考研收录",
+    "description": "考研知识点收录、温习、打卡管理工具",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "background_color": "#f0f0f5",
+    "theme_color": "#f0f0f5",
+    "orientation": "any",
+    "icons": [
+        {
+            "src": "./icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "./icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}

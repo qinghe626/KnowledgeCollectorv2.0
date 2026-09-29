@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>生成 PWA 图标</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; background: #f0f0f5; gap: 20px; }
+        button { padding: 14px 32px; font-size: 16px; border: none; border-radius: 12px; background: #333; color: #fff; cursor: pointer; }
+        button:hover { background: #555; }
+        canvas { border: 1px solid #ddd; border-radius: 12px; }
+        p { color: #666; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <h2>考研收录助手 - PWA 图标生成器</h2>
+    <p>点击按钮自动生成并下载两个图标文件</p>
+    <canvas id="c192" width="192" height="192"></canvas>
+    <canvas id="c512" width="512" height="512"></canvas>
+    <button onclick="generate()">生成并下载图标</button>
+    <p>下载后请将文件重命名为 icon-192.png 和 icon-512.png，放到项目根目录</p>
+
+    <script>
+    function drawIcon(canvas, size) {
+        const ctx = canvas.getContext('2d');
+        const s = size;
+
+        // 背景圆角矩形
+        ctx.fillStyle = '#2c2c2e';
+        const r = s * 0.22;
+        ctx.beginPath();
+        ctx.moveTo(r, 0);
+        ctx.lineTo(s - r, 0);
+        ctx.quadraticCurveTo(s, 0, s, r);
+        ctx.lineTo(s, s - r);
+        ctx.quadraticCurveTo(s, s, s - r, s);
+        ctx.lineTo(r, s);
+        ctx.quadraticCurveTo(0, s, 0, s - r);
+        ctx.lineTo(0, r);
+        ctx.quadraticCurveTo(0, 0, r, 0);
+        ctx.closePath();
+        ctx.fill();
+
+        // 书本图标（白色线条）
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = s * 0.04;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+
+        const cx = s / 2;
+        const cy = s / 2;
+        const bw = s * 0.35; // book width
+        const bh = s * 0.30; // book height
+
+        // 书本左页
+        ctx.beginPath();
+        ctx.moveTo(cx - bw * 0.1, cy - bh * 0.5);
+        ctx.lineTo(cx - bw * 0.1, cy + bh * 0.5);
+        ctx.stroke();
+
+        // 左页轮廓
+        ctx.beginPath();
+        ctx.moveTo(cx - bw * 0.1, cy - bh * 0.5);
+        ctx.quadraticCurveTo(cx - bw * 0.6, cy - bh * 0.55, cx - bw * 0.55, cy - bh * 0.3);
+        ctx.lineTo(cx - bw * 0.55, cy + bh * 0.3);
+        ctx.quadraticCurveTo(cx - bw * 0.6, cy + bh * 0.55, cx - bw * 0.1, cy + bh * 0.5);
+        ctx.stroke();
+
+        // 右页轮廓
+        ctx.beginPath();
+        ctx.moveTo(cx + bw * 0.1, cy - bh * 0.5);
+        ctx.quadraticCurveTo(cx + bw * 0.6, cy - bh * 0.55, cx + bw * 0.55, cy - bh * 0.3);
+        ctx.lineTo(cx + bw * 0.55, cy + bh * 0.3);
+        ctx.quadraticCurveTo(cx + bw * 0.6, cy + bh * 0.55, cx + bw * 0.1, cy + bh * 0.5);
+        ctx.stroke();
+
+        // 文字 "考研"
+        ctx.fillStyle = '#ffffff';
+        ctx.font = `bold ${s * 0.1}px -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('考研', cx, cy + bh * 0.75);
+    }
+
+    function generate() {
+        const c192 = document.getElementById('c192');
+        const c512 = document.getElementById('c512');
+
+        drawIcon(c192, 192);
+        drawIcon(c512, 512);
+
+        // 下载
+        download(c192, 'icon-192.png');
+        download(c512, 'icon-512.png');
+    }
+
+    function download(canvas, filename) {
+        const link = document.createElement('a');
+        link.download = filename;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#f0f0f5">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="考研收录">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="apple-touch-icon" href="./icon-192.png">
+    <title>考研知识点收录助手</title>
+    <link rel="stylesheet" href="style.css?v=95">
+</head>
+<body>
+    <div class="app">
+        <!-- 左侧边栏导航 -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <span class="sidebar-logo">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                </span>
+            </div>
+            <button class="sidebar-btn" data-tab="profile">
+                <svg class="sidebar-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <span class="sidebar-label">我的</span>
+            </button>
+            <button class="sidebar-btn sidebar-btn-primary" data-tab="home">
+                <svg class="sidebar-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                <span class="sidebar-label">主页</span>
+            </button>
+            <button class="sidebar-btn" data-tab="add">
+                <svg class="sidebar-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                <span class="sidebar-label">收录</span>
+            </button>
+            <button class="sidebar-btn" data-tab="browse">
+                <svg class="sidebar-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+                <span class="sidebar-label">总览</span>
+            </button>
+            <button class="sidebar-btn sidebar-btn-primary" data-tab="review">
+                <svg class="sidebar-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+                <span class="sidebar-label">温习</span>
+            </button>
+            <div class="sidebar-spacer"></div>
+            <button class="sidebar-btn" data-tab="settings">
+                <svg class="sidebar-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                <span class="sidebar-label">设置</span>
+            </button>
+        </nav>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 主页面板 -->
+            <section id="home-panel" class="panel active">
+                <div class="panel-header">
+                    <h2>主页</h2>
+                </div>
+                <div class="panel-body">
+                    <div class="home-grid">
+                        <!-- 左侧：考研倒计时（左上 1/4） -->
+                        <div class="home-grid-left">
+                            <div class="card home-countdown-card">
+                        <div class="home-countdown-header">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            <span>距离考研还有</span>
+                            <button class="home-countdown-edit" id="btn-edit-exam-year" title="调整考研届数">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                            </button>
+                        </div>
+                        <div class="home-countdown-days" id="home-countdown-days">--</div>
+                        <div class="home-countdown-sub">天</div>
+                        <div class="home-countdown-date" id="home-countdown-date"></div>
+                        <div class="home-countdown-year-selector" id="home-countdown-year-selector" style="display:none;">
+                            <button class="year-btn" data-year="2026">26届</button>
+                            <button class="year-btn" data-year="2027">27届</button>
+                            <button class="year-btn" data-year="2028">28届</button>
+                            <button class="year-btn" data-year="2029">29届</button>
+                            <button class="year-btn" data-year="2030">30届</button>
+                        </div>
+                        </div>
+                        </div>
+
+                        <!-- 左下：打卡日历（左下 1/4） -->
+                        <div class="home-grid-left-bottom">
+                            <div class="card home-calendar-card">
+                                <div class="home-calendar-header">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                    <span>打卡日历</span>
+                                    <div class="calendar-nav-buttons">
+                                        <button class="btn btn-icon" id="btn-prev-month" title="上一月">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                                        </button>
+                                        <button class="btn btn-icon" id="btn-next-month" title="下一月">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="calendar-container" id="home-calendar"></div>
+                            </div>
+                        </div>
+
+                        <!-- 右侧：今日收录+激励语（右上 1/4）+ 打卡（右下 1/4） -->
+                        <div class="home-grid-right-top">
+                                <!-- 今日收录统计 -->
+                                <div class="card home-today-card">
+                        <div class="home-today-header">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                            <span>今日收录</span>
+                        </div>
+                        <div class="home-today-count" id="home-today-count">0</div>
+                        <div class="home-today-sub">条知识点</div>
+                    </div>
+
+                    <!-- 激励语卡片 -->
+                    <div class="card home-quote-card">
+                        <div class="home-quote-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                        </div>
+                        <p class="home-quote-text" id="home-quote-text"></p>
+                        <p class="home-quote-hint">每天进步一点点，考研加油</p>
+                    </div>
+                            </div>
+
+                        <!-- 右下：每日打卡（右下 1/4） -->
+                        <div class="home-grid-right-bottom">
+                            <div class="card home-checkin-card">
+                        <div class="home-checkin-header">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                            <span>每日打卡</span>
+                            <span class="home-checkin-date" id="home-checkin-date"></span>
+                        </div>
+                        <textarea class="home-checkin-textarea" id="home-checkin-text" placeholder="写下今日完成的学习任务..."></textarea>
+                        <div class="home-checkin-actions">
+                            <button class="btn btn-primary" id="btn-save-checkin">保存打卡</button>
+                            <button class="btn btn-outline" id="btn-modify-checkin" style="display:none;">修改打卡</button>
+                            <button class="btn btn-danger" id="btn-delete-checkin" style="display:none;">删除打卡</button>
+                            <span class="home-checkin-status" id="home-checkin-status"></span>
+                        </div>
+                        <!-- 历史打卡记录 -->
+                        <div class="home-checkin-history" id="home-checkin-history"></div>
+                    </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 收录面板 -->
+            <section id="add-panel" class="panel">
+                <div class="panel-header">
+                    <h2>收录新知识点</h2>
+                </div>
+                <div class="panel-body">
+                    <form id="knowledge-form">
+                        <div class="form-group">
+                            <label for="subject">学科分类 <span class="required">*</span></label>
+                            <select id="subject" required>
+                                <option value="">请选择学科</option>
+                                <option value="政治">政治</option>
+                                <option value="英语">英语</option>
+                                <option value="数学">数学</option>
+                                <option value="专业课">专业课</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group sub-subject-area" id="sub-subject-area" style="display:none;">
+                            <label>专业课科目</label>
+                            <div class="sub-subject-tags" id="sub-subject-tags"></div>
+                            <div class="sub-subject-add-row">
+                                <input type="text" id="sub-subject-input" placeholder="输入子科目名称，如：数据结构" />
+                                <button type="button" class="btn btn-outline btn-sm" id="btn-add-sub-subject">+ 添加</button>
+                            </div>
+                            <p class="sub-subject-hint">点击标签可快速填入知识点分类</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="topic">知识点分类</label>
+                            <input type="text" id="topic" placeholder="如：马原、毛中特、近代史..." />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="content-text">
+                                知识点内容
+                                <span class="voice-label" id="voice-label">
+                                    <button type="button" class="voice-btn" id="voice-btn" title="语音输入">
+                                        <svg class="mic-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+                                        <span class="voice-text">语音输入</span>
+                                    </button>
+                                </span>
+                            </label>
+                            <textarea id="content-text" rows="6" placeholder="在此输入知识点内容，或点击语音输入..."></textarea>
+                            <div class="voice-status" id="voice-status" style="display:none;">
+                                <span class="voice-dot"></span>
+                                <span id="voice-status-text">正在聆听，请说话...</span>
+                                <button type="button" class="voice-stop-btn" id="voice-stop-btn">停止</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>图片附件</label>
+                            <div class="image-upload-area" id="image-upload-area">
+                                <input type="file" id="image-input" accept="image/*" multiple hidden />
+                                <div class="upload-placeholder" id="upload-placeholder">
+                                    <svg class="upload-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                                    <p>点击或拖拽上传图片</p>
+                                    <p class="upload-hint">支持 JPG、PNG 格式</p>
+                                </div>
+                                <div class="image-preview-list" id="image-preview-list"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="note">备注（可选）</label>
+                            <input type="text" id="note" placeholder="添加备注信息..." />
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">
+                            收录知识点
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- 总览面板 -->
+            <section id="browse-panel" class="panel">
+                <div class="panel-header">
+                    <h2>总览知识点</h2>
+                </div>
+                <div class="panel-body">
+                    <div class="browse-controls">
+                        <div class="search-box">
+                            <input type="text" id="search-input" placeholder="搜索知识点..." />
+                        </div>
+                        <div class="filter-row">
+                            <select id="filter-subject">
+                                <option value="">全部学科</option>
+                            </select>
+                            <select id="filter-sort">
+                                <option value="time-desc">最新优先</option>
+                                <option value="time-asc">最早优先</option>
+                                <option value="count-desc">重复次数多</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="knowledge-list" class="knowledge-list">
+                        <div class="empty-state">
+                            <svg class="empty-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8V21H3V8"/><path d="M1 3h22v5H1z"/><path d="M10 12h4"/></svg>
+                            <p>暂无知识点记录</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 温习面板 -->
+            <section id="review-panel" class="panel">
+                <div class="panel-header">
+                    <h2>温习知识点</h2>
+                </div>
+                <div class="panel-body">
+                    <div class="review-controls">
+                        <div class="review-filter-row">
+                            <select id="review-subject">
+                                <option value="">全部学科</option>
+                            </select>
+                            <select id="review-order">
+                                <option value="random">随机顺序</option>
+                                <option value="time-asc">最先收录至最后</option>
+                                <option value="time-desc">最后收录至最前</option>
+                            </select>
+                        </div>
+                        <div class="review-date-row">
+                            <div class="review-date-field">
+                                <label>起始时间</label>
+                                <div class="date-input-wrapper">
+                                    <input type="text" id="review-date-from-display" placeholder="选择起始时间" readonly />
+                                    <input type="datetime-local" id="review-date-from" hidden />
+                                    <button type="button" class="date-picker-btn" data-target="review-date-from" title="选择日期">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="review-date-field">
+                                <label>截止时间</label>
+                                <div class="date-input-wrapper">
+                                    <input type="text" id="review-date-to-display" placeholder="选择截止时间" readonly />
+                                    <input type="datetime-local" id="review-date-to" hidden />
+                                    <button type="button" class="date-picker-btn" data-target="review-date-to" title="选择日期">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary btn-block" id="btn-start-review">开始温习</button>
+                    </div>
+
+                    <div id="review-area" class="review-area" style="display:none;">
+                        <div class="review-progress">
+                            <span id="review-progress-text">0 / 0</span>
+                            <div class="review-progress-bar">
+                                <div class="review-progress-fill" id="review-progress-fill"></div>
+                            </div>
+                        </div>
+
+                        <div class="review-card" id="review-card">
+                            <div class="review-card-header">
+                                <span class="knowledge-subject-tag" id="review-subject-tag">政治</span>
+                                <span class="review-card-topic" id="review-topic">马原</span>
+                            </div>
+                            <div class="review-card-content" id="review-content">
+                                知识点内容显示在这里
+                            </div>
+                            <div class="review-card-images" id="review-images"></div>
+                            <div class="review-card-note" id="review-note"></div>
+                        </div>
+
+                        <div class="review-actions">
+                            <button class="btn btn-outline" id="btn-review-prev">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                                上一条
+                            </button>
+                            <button class="btn btn-outline" id="btn-review-shuffle">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
+                                换一批
+                            </button>
+                            <button class="btn btn-primary" id="btn-review-next">
+                                下一条
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="review-empty" class="empty-state" style="display:none;">
+                        <svg class="empty-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8V21H3V8"/><path d="M1 3h22v5H1z"/><path d="M10 12h4"/></svg>
+                        <p>没有匹配的知识点，请调整筛选条件</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 我的面板 -->
+            <section id="profile-panel" class="panel">
+                <div class="panel-header">
+                    <h2>我的</h2>
+                </div>
+                <div class="panel-body">
+                    <div class="card profile-card">
+                        <div class="profile-avatar-section">
+                            <div class="profile-avatar-wrapper" id="profile-avatar-wrapper">
+                                <div class="profile-avatar-default" id="profile-avatar-default">
+                                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                </div>
+                                <img class="profile-avatar-img" id="profile-avatar-img" src="" alt="" style="display:none;" />
+                            </div>
+                            <input type="file" id="avatar-input" accept="image/*" hidden />
+                            <button class="btn-change-avatar" id="btn-edit-avatar">更换头像</button>
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-nickname">昵称</label>
+                            <input type="text" id="profile-nickname" placeholder="请输入你的昵称" />
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-university">目标院校</label>
+                            <input type="text" id="profile-university" placeholder="请输入你的目标院校" />
+                        </div>
+                        <button class="btn btn-primary btn-full" id="btn-save-profile">保存信息</button>
+                        <div class="profile-save-status" id="profile-save-status"></div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">学习概览</h3>
+                        <div class="profile-stats-row">
+                            <div class="profile-stat-item">
+                                <div class="profile-stat-number" id="profile-total-days">0</div>
+                                <div class="profile-stat-label">累计打卡天数</div>
+                            </div>
+                            <div class="profile-stat-item">
+                                <div class="profile-stat-number" id="profile-total-knowledge">0</div>
+                                <div class="profile-stat-label">收录知识点</div>
+                            </div>
+                            <div class="profile-stat-item">
+                                <div class="profile-stat-number" id="profile-streak-days">0</div>
+                                <div class="profile-stat-label">连续打卡</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 设置面板 -->
+            <section id="settings-panel" class="panel">
+                <div class="panel-header">
+                    <h2>设置</h2>
+                </div>
+                <div class="panel-body">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number" id="stat-total">0</div>
+                            <div class="stat-label">总知识点数</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="stat-duplicates">0</div>
+                            <div class="stat-label">重复收录</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="stat-week">0</div>
+                            <div class="stat-label">本周新增</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="stat-today">0</div>
+                            <div class="stat-label">今日新增</div>
+                        </div>
+                    </div>
+
+                    <div class="card storage-info-card">
+                        <div class="storage-info-header">
+                            <h3 class="card-title" style="margin-bottom:8px;border:none;padding:0;">存储空间</h3>
+                            <span class="storage-text" id="storage-usage">计算中...</span>
+                        </div>
+                        <div class="storage-bar">
+                            <div class="storage-bar-fill" id="storage-bar-fill"></div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">学科分布</h3>
+                        <div id="subject-distribution" class="distribution-list"></div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">高频重复知识点 TOP 5</h3>
+                        <div id="top-duplicates" class="distribution-list">
+                            <p class="empty-text">暂无重复记录</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">数据管理</h3>
+                        <div class="data-actions-vertical">
+                            <div class="data-action-item">
+                                <button class="btn btn-outline" id="btn-export">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    备份数据
+                                </button>
+                                <span class="data-action-hint">把知识点保存到电脑，防止丢失</span>
+                            </div>
+                            <div class="data-action-item">
+                                <button class="btn btn-outline" id="btn-import">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                    恢复数据
+                                </button>
+                                <span class="data-action-hint">从之前备份的文件中恢复</span>
+                            </div>
+                            <div class="data-action-item">
+                                <button class="btn btn-danger" id="btn-clear">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+                                    清空数据
+                                </button>
+                                <span class="data-action-hint">删除所有知识点，不可恢复</span>
+                            </div>
+                        </div>
+                        <input type="file" id="import-file-input" accept=".json" hidden />
+                    </div>
+
+                    <!-- AI 辅助功能 -->
+                    <div class="card">
+                        <h3 class="card-title">AI 辅助功能</h3>
+                        <p class="ai-settings-desc">接入 AI 后可使用「智能讲解」和「AI 辅助查重」功能。你的 API 密钥仅保存在本地浏览器中，不会上传到任何服务器。</p>
+                        <div class="form-group">
+                            <label for="ai-base-url">API 地址</label>
+                            <input type="text" id="ai-base-url" placeholder="如：https://api.openai.com/v1" />
+                        </div>
+                        <div class="form-group">
+                            <label for="ai-api-key">API 密钥</label>
+                            <input type="password" id="ai-api-key" placeholder="sk-..." />
+                        </div>
+                        <div class="form-group">
+                            <label for="ai-model">模型名称</label>
+                            <input type="text" id="ai-model" placeholder="如：gpt-4o-mini" />
+                        </div>
+                        <div class="ai-actions">
+                            <button class="btn btn-primary" id="btn-save-ai">保存配置</button>
+                            <button class="btn btn-outline" id="btn-test-ai">测试连接</button>
+                        </div>
+                        <div id="ai-status" class="ai-status"></div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">功能说明</h3>
+                        <div class="ai-feature-list">
+                            <div class="ai-feature-item">
+                                <svg class="ai-feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>
+                                <div>
+                                    <strong>智能讲解</strong>
+                                    <p>在总览知识点时，点击「AI 讲解」按钮，AI 会用通俗易懂的语言帮你理解和记忆这个知识点</p>
+                                </div>
+                            </div>
+                            <div class="ai-feature-item">
+                                <svg class="ai-feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                                <div>
+                                    <strong>AI 辅助查重</strong>
+                                    <p>收录知识点时，如果检测到相似内容，AI 会进一步判断两者是否真的在考同一个知识点，避免误判</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- 重复提醒弹窗 -->
+        <div class="modal-overlay" id="duplicate-modal">
+            <div class="modal">
+                <div class="modal-header warning">
+                    <h3>发现相似知识点</h3>
+                </div>
+                <div class="modal-body">
+                    <p class="modal-message">系统检测到以下已收录的知识点与当前内容相似，你可以选择合并到已有条目中：</p>
+                    <div id="duplicate-list" class="duplicate-list"></div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline" id="btn-ai-dup-check">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4v1a1 1 0 0 0 1 1h1a4 4 0 0 1 0 8h-1a1 1 0 0 0-1 1v1a4 4 0 0 1-8 0v-1a1 1 0 0 0-1-1H6a4 4 0 0 1 0-8h1a1 1 0 0 0 1-1V6a4 4 0 0 1 4-4z"/><circle cx="12" cy="12" r="2"/></svg>
+                        AI 判断
+                    </button>
+                    <button class="btn btn-outline" id="btn-cancel-add">取消</button>
+                    <button class="btn btn-primary" id="btn-force-add">作为新条目收录</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 详情弹窗 -->
+        <div class="modal-overlay" id="detail-modal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3> 知识点详情</h3>
+                    <button class="modal-close" id="close-detail">&times;</button>
+                </div>
+                <div class="modal-body" id="detail-content"></div>
+            </div>
+        </div>
+
+        <!-- AI 讲解弹窗 -->
+        <div class="modal-overlay" id="ai-modal">
+            <div class="modal ai-modal">
+                <div class="modal-header">
+                    <h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;"><path d="M12 2a4 4 0 0 1 4 4v1a1 1 0 0 0 1 1h1a4 4 0 0 1 0 8h-1a1 1 0 0 0-1 1v1a4 4 0 0 1-8 0v-1a1 1 0 0 0-1-1H6a4 4 0 0 1 0-8h1a1 1 0 0 0 1-1V6a4 4 0 0 1 4-4z"/><circle cx="12" cy="12" r="2"/></svg>
+                        AI 讲解
+                    </h3>
+                    <button class="modal-close" id="close-ai">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="ai-question" id="ai-question"></div>
+                    <div class="ai-answer" id="ai-answer">
+                        <p class="ai-empty">点击「开始讲解」让 AI 帮你理解这个知识点</p>
+                    </div>
+                    <div class="ai-modal-actions">
+                        <button class="btn btn-primary btn-sm" id="btn-ai-explain">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                            开始讲解
+                        </button>
+                        <button class="btn btn-outline btn-sm" id="btn-ai-similar-check" style="display:none;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            AI 判断是否相似
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 提示消息 -->
+        <div class="toast-container" id="toast-container"></div>
+    </div>
+
+    <script src="app.js?v=82"></script>
+    <script>
+        // PWA Service Worker 注册
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./service-worker.js').catch(() => {});
+            });
+        }
+    </script>
+    
+    <!-- 调试：确认 JS 加载 -->
+    <script>
+        console.log('[HTML] HTML 已加载，等待 app.js...');
+        window.addEventListener('load', () => {
+            console.log('[HTML] 页面完全加载完成');
+            if (typeof app !== 'undefined') {
+                console.log('[HTML] app 对象已定义:', app);
+            } else {
+                console.error('[HTML] app 对象未定义！JS 可能未加载或初始化失败');
+            }
+        });
+    </script>
+</body>
+</html>
